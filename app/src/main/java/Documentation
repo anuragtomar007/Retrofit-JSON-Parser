@@ -1,0 +1,50 @@
+
+                    RETROFIT JSON PARSER USING RECYCLERVIEW
+
+  For Android Linux users:  Alt + j = Selects the same word which you have selected all
+  over the page (You have to select a word and then press this key combination)
+
+1st Stage
+Steps:
+
+1-Include Retrofit,Gson Converter and Recycler View dependencies in app level gradle file.
+2-Create an Interface and Give the base url and the method(GET/POST) passing them the next
+ part of the url.After that create a function (here getApi()) whose return type will be an
+ list of type POJO class you'll create in Next Step,and whole return type will be a Call.
+3-Create a POJO class and declare the variables for what you want to fetch from the given API.
+  @SerializedName should be used and value passed should be the same as the KEY in the JSON(API).
+4-Create an Adapter class for RecyclerView and override the necessary functions and write the
+  required logic.Remember to just pass the Context to the constructor not the List.
+  Note: setDatas is the extra function you create here..Have a close look to that.
+5-Now inside the MainActivity,create an instance of Recyclerview,its adapter class you created
+  and layoutManager.Initialize these inside the onCreate() function.
+6-After that,create a new function and call this function inside onCreate() function.
+7-Inside the function you created just now.. Create a retrofit instance using Builder.
+  Create an instance of the Interface you created in Step 2 and instance to hold the value when
+  you call the Interface method(here getApi()).On this instance call enqueue passing a
+  new Callback.Inside onResponse method,get the response from the API and call the
+  setDatas() function you created inside the adapter class.Inside onFailure,just give a Toast.
+
+2nd Stage
+Steps:Using Glide Library to load image and few custom configurations
+
+1- Add dependencies into app level gradle file for Glide library.
+2- Add Internet permission to Manifest File.
+3- Inside the onBindViewHolder method of RecyclerAdapter class, write the code for the Glide
+   library to load the image from the url to the imageview declared inside the layout.
+4- To open the link just set autolink property of textview to web.
+5- Create a class "SimpleDividerItemDecoration" for the divider in the each element of
+   RecyclerView, and then call addItemDecoration method on recyclerView in MainActivity
+   passing the same class.
+6- (For Circular Image): Create a class "GlideCircleTransformation" implementing Transformation
+    Since we are not able to pass the bitmapPool from the MainActivity,thats why we create two
+    constructors.
+7- Change the parent in styles.xml to NoActionBar.Create a toolbar in activity_main.xml and
+   then create a menu file inside the menu folder under res directory.
+   Inside menu folder,create an item to have search icon and so on.
+8- (Functionality of Search) :Implement the Adapter with Filterable class and override the
+   getFilter method to retuen the Filter.Create a new Filter and overrride the performFiltering
+   and publishResults method for this Filter.Inside the performFiltering method filter the
+   results after checking for the empty string.(See the new Filter() call for more )
+
+   Rest just see and try to figure out :-)
